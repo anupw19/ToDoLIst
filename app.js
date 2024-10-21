@@ -8,8 +8,6 @@ const _ = require("lodash");
 
 const app = express();
 
-// let items = ["Study","Eat","Sleep","Repeat"];
-// let workItems = [];
 
 mongoose.connect(process.env.DATABASE);
 
@@ -85,37 +83,6 @@ app.post("/",function(req,res){
     item.save();
     res.redirect("/");
 
-
-
-
-    // let today = date.getDate();
-
-    // if(itemName!== ""){
-
-    // if(listName === today){
-    //     item.save();
-
-    //     res.redirect("/");
-    // }else{
-    //     List.findOne({name: listName}).then(function(foundList){
-    //         foundList.items.push(item);
-    //         foundList.save();
-    //         res.redirect("/" + listName);   
-    //     })
-    // }
-    
-    // }
-   
-
-    // let item = req.body.newItem;
-
-    // if(req.body.list==="work"){
-    //     workItems.push(item);
-    //     res.redirect("/work");
-    // }else{
-    //     items.push(item);
-    //     res.redirect("/");
-    // }
 })
 
 app.post("/delete",function(req,res){
@@ -134,9 +101,6 @@ app.post("/delete",function(req,res){
    res.redirect("/");
 });
 
-// app.get("/work",function(req,res){
-//     res.render("list",{listTitle:"work List",newListItem:workItems})
-// })
 
 app.get("/:customListName",function(req,res){
     const customListName = _.capitalize(req.params.customListName);
@@ -153,7 +117,6 @@ app.get("/:customListName",function(req,res){
             list.save();
             res.render("/"+ customListName);
         }else{
-            //show an existing file
             res.render("list",{listTitle: foundList.name , newListItems: foundList.name})
         }
     }).catch(function(err){
